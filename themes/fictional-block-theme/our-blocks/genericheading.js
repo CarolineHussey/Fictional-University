@@ -1,10 +1,6 @@
 import { registerBlockType } from "@wordpress/blocks";
 import { RichText, BlockControls } from "@wordpress/block-editor";
-import {
-  ToolbarGroup,
-  ToolbarButtons,
-  ToolbarButton,
-} from "@wordpress/components";
+import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
 
 registerBlockType("ourblocktheme/genericheading", {
   title: "Generic Heading",
