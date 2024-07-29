@@ -1,0 +1,1 @@
+Our Blocks banner.php with render callback
