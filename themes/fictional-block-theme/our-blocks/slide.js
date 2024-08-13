@@ -9,9 +9,8 @@ import {
 import { registerBlockType } from "@wordpress/blocks";
 import { useEffect } from "@wordpress/element";
 
-//the first arguement is namespace/blockname which is instantiated within registerBlockType (namespace is the namespace that all blocks will use; banner is the name of this particular block (see: functions.php))
-registerBlockType("ourblocktheme/banner", {
-  title: "Banner",
+registerBlockType("ourblocktheme/slide", {
+  title: "Slide",
   supports: {
     align: ["full"],
   },
@@ -43,22 +42,6 @@ function EditComponent(props) {
     [props.attributes.imgID]
   );
 
-  const forLater = (
-    <>
-      <h1 className="headline headline--large">Welcome!</h1>
-      <h2 className="headline headline--medium">
-        We think you&rsquo;ll like it here.
-      </h2>
-      <h3 className="headline headline--small">
-        Why don&rsquo;t you check out the <strong>major</strong> you&rsquo;re
-        interested in?
-      </h3>
-      <a href="#" className="btn btn--large btn--blue">
-        Find Your Major
-      </a>
-    </>
-  );
-
   function onFileSelect(x) {
     console.log(x);
     props.setAttributes({ imgID: x.id });
@@ -81,20 +64,22 @@ function EditComponent(props) {
           </PanelRow>
         </PanelBody>
       </InspectorControls>
-      <div className="page-banner">
-        <div
-          className="page-banner__bg-image"
-          style={{
-            backgroundImage: `url('${props.attributes.imgURL}')`,
-          }}
-        ></div>
-        <div className="page-banner__content container t-center c-white">
-          <InnerBlocks
-            allowedBlocks={[
-              "ourblocktheme/genericheading",
-              "ourblocktheme/genericbutton",
-            ]}
-          />
+
+      <div
+        className="hero-slider__slide"
+        style={{
+          backgroundImage: `url('${props.attributes.imgURL}')`,
+        }}
+      >
+        <div class="hero-slider__interior container">
+          <div class="hero-slider__overlay t-center">
+            <InnerBlocks
+              allowedBlocks={[
+                "ourblocktheme/genericheading",
+                "ourblocktheme/genericbutton",
+              ]}
+            />
+          </div>
         </div>
       </div>
     </>

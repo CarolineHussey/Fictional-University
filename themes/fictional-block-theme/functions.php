@@ -174,7 +174,7 @@ function pageBanner($args = NULL) { ?>
     add_filter('wp_insert_post_data', 'setStatusToPrivate', 10, 2);
 
 
-//block theme placeholder block
+//block theme placeholder block (editor will have a placeholder for the block rather than a wysiwyg rendered block)
 class PlaceholderBlock {
     function __construct($name) {
       $this->name = $name;
@@ -201,7 +201,7 @@ class PlaceholderBlock {
   new PlaceholderBlock("header");
   new PlaceholderBlock("footer");
 
-    //block theme JSX Block
+    //block theme JSX Block (wysiwyg block is rendered in the editor as well as in the front end)
     class JSXBlock {
         function __construct($name, $renderCallback = null, $data = null) {
             $this->name = $name;
@@ -237,5 +237,7 @@ class PlaceholderBlock {
     new JSXBlock('banner', true, ['fallbackimage' => get_theme_file_uri('/images/library-hero.jpg')]);
     new JSXBlock('genericheading');
     new JSXBlock('genericbutton');
+    new JSXBlock('slideshow', true);
+    new JSXBlock('slide', true);
 
 ?>

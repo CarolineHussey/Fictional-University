@@ -131,9 +131,9 @@ module.exports = window["wp"]["element"];
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-/*!******************************!*\
-  !*** ./our-blocks/banner.js ***!
-  \******************************/
+/*!*****************************!*\
+  !*** ./our-blocks/slide.js ***!
+  \*****************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -153,10 +153,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-//the first arguement is namespace/blockname which is instantiated within registerBlockType (namespace is the namespace that all blocks will use; banner is the name of this particular block (see: functions.php))
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__.registerBlockType)("ourblocktheme/banner", {
-  title: "Banner",
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__.registerBlockType)("ourblocktheme/slide", {
+  title: "Slide",
   supports: {
     align: ["full"]
   },
@@ -191,16 +189,6 @@ function EditComponent(props) {
       go();
     }
   }, [props.attributes.imgID]);
-  const forLater = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", {
-    className: "headline headline--large"
-  }, "Welcome!"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "headline headline--medium"
-  }, "We think you\u2019ll like it here."), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
-    className: "headline headline--small"
-  }, "Why don\u2019t you check out the ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("strong", null, "major"), " you\u2019re interested in?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "#",
-    className: "btn btn--large btn--blue"
-  }, "Find Your Major"));
   function onFileSelect(x) {
     console.log(x);
     props.setAttributes({
@@ -221,21 +209,21 @@ function EditComponent(props) {
       }, "Choose Image");
     }
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "page-banner"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "page-banner__bg-image",
+    className: "hero-slider__slide",
     style: {
       backgroundImage: `url('${props.attributes.imgURL}')`
     }
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "page-banner__content container t-center c-white"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hero-slider__interior container"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    class: "hero-slider__overlay t-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InnerBlocks, {
     allowedBlocks: ["ourblocktheme/genericheading", "ourblocktheme/genericbutton"]
-  }))));
+  })))));
 }
 function SaveComponent() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InnerBlocks.Content, null);
 }
 /******/ })()
 ;
-//# sourceMappingURL=banner.js.map
+//# sourceMappingURL=slide.js.map
