@@ -207,6 +207,12 @@ class PlaceholderBlock {
   new PlaceholderBlock("singleprogram");
   new PlaceholderBlock("singleprofessor");
   new PlaceholderBlock("notes");
+  new PlaceholderBlock("archiveevent");
+  new PlaceholderBlock("singleevent");
+  new PlaceholderBlock("archivecampus");
+  new PlaceholderBlock("singlecampus");
+  new PlaceholderBlock("search");
+  new PlaceholderBlock("searchresults");
 
     //block theme JSX Block (wysiwyg block is rendered in the editor as well as in the front end)
     class JSXBlock {

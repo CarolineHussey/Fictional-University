@@ -1,7 +1,5 @@
-<?php
-    get_header();
-
-    while(have_posts()) {
+<?php 
+while(have_posts()) {
         the_post(); 
         pageBanner();
         ?>
@@ -58,8 +56,4 @@
 </div>
 
 
-<?php }
-
-get_footer();
-
-?>
+<?php } ?>
