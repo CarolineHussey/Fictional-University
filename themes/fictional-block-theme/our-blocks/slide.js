@@ -18,12 +18,24 @@ registerBlockType("ourblocktheme/slide", {
     align: { type: "string", default: "full" },
     imgID: { type: "number" },
     imgURL: { type: "string", default: window.banner.fallbackimage },
+    themeimage: { type: "string" },
   },
   edit: EditComponent,
   save: SaveComponent,
 });
 
 function EditComponent(props) {
+  useEffect(
+    function () {
+      if (props.attributes.themeimage) {
+        props.setAttributes({
+          imgURL: `${slide.themeimagepath}${props.attributes.themeimage}`,
+        });
+      }
+    },
+    [] //runs on initial load
+  );
+
   useEffect(
     function () {
       if (props.attributes.imgID) {
@@ -33,17 +45,17 @@ function EditComponent(props) {
             method: "GET",
           });
           props.setAttributes({
+            themeimage: "",
             imgURL: response.media_details.sizes.full.source_url,
           });
         }
         go();
       }
     },
-    [props.attributes.imgID]
+    [props.attributes.imgID] //looks for a change to the imgID
   );
 
   function onFileSelect(x) {
-    console.log(x);
     props.setAttributes({ imgID: x.id });
   }
 

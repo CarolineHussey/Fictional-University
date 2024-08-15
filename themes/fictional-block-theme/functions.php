@@ -200,6 +200,13 @@ class PlaceholderBlock {
   new PlaceholderBlock("eventsandblogs");
   new PlaceholderBlock("header");
   new PlaceholderBlock("footer");
+  new PlaceholderBlock("singlepost");
+  new PlaceholderBlock("page");
+  new PlaceholderBlock("blogindex");
+  new PlaceholderBlock("programarchive");
+  new PlaceholderBlock("singleprogram");
+  new PlaceholderBlock("singleprofessor");
+  new PlaceholderBlock("notes");
 
     //block theme JSX Block (wysiwyg block is rendered in the editor as well as in the front end)
     class JSXBlock {
@@ -238,6 +245,20 @@ class PlaceholderBlock {
     new JSXBlock('genericheading');
     new JSXBlock('genericbutton');
     new JSXBlock('slideshow', true);
-    new JSXBlock('slide', true);
+    new JSXBlock('slide', true, ['themeimagepath' => get_theme_file_uri('/images/')]);
+
+    //only allow certain block types in certain editor environments
+
+    function allowedBlocks($allowed_block_types, $editor_context) {
+        //if the user is on a post or page editor screen
+        if(!empty($editor_context->post)) {
+            //all block types are allowed (no restrictions)
+            return $allowed_block_types;
+        }
+        //if user is on an FSE screen
+        return array('ourblocktheme/header', "ourblocktheme/footer", "core/paragraph", "core/heading");
+    }
+
+    add_filter('allowed_block_types_all', 'allowedBlocks', 10, 2);
 
 ?>
