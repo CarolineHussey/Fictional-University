@@ -1,7 +1,7 @@
 # Fictional University
 
 Fictional University is a custom WordPress theme with associated plugins. Features include:
-  - Customm Pages
+  - Custom Pages
   - Custom Archives
   - Live and Traditional Search
   - User Management
@@ -19,6 +19,7 @@ Fictional University is a custom WordPress theme with associated plugins. Featur
 ## Languages and Tech Used
 - WordPress
 - Javascript
+- JSX & React
 - PHP
 - JQuery / Axios
 - Ajax
