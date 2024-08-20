@@ -154,7 +154,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//the first arguement is namespace/blockname which is instantiated within registerBlockType (namespace is the namespace that all blocks will use; banner is the name of this particular block)
+//the first arguement is namespace/blockname which is instantiated within registerBlockType (namespace is the namespace that all blocks will use; banner is the name of this particular block (see: functions.php))
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__.registerBlockType)("ourblocktheme/banner", {
   title: "Banner",
   supports: {
