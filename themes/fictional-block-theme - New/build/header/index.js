@@ -56,7 +56,7 @@ module.exports = window["wp"]["blockEditor"];
   \*******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ourblocktheme/header","editorScript":"file:./index.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ourblocktheme/header","title":"Theme Header","editorScript":"file:./index.js","render":"file:./render.php"}');
 
 /***/ })
 
@@ -138,7 +138,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 wp.blocks.registerBlockType(_block_json__WEBPACK_IMPORTED_MODULE_0__.name, {
-  title: "Theme Header",
   edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /******/ })()

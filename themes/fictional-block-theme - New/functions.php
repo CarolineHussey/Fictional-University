@@ -173,114 +173,46 @@ function pageBanner($args = NULL) { ?>
     //Force notes to have a status of private
     add_filter('wp_insert_post_data', 'setStatusToPrivate', 10, 2);
 
-
-//block theme placeholder block (editor will have a placeholder for the block rather than a wysiwyg rendered block)
-class PlaceholderBlock {
-    function __construct($name) {
-      $this->name = $name;
-      add_action('init', [$this, 'onInit']);
-    }
-  
-    function ourRenderCallback($attributes, $content) {
-      ob_start();
-      require get_theme_file_path("/our-blocks/{$this->name}.php");
-      return ob_get_clean();
-    }
-  
-    function onInit() {
-      wp_register_script($this->name, get_stylesheet_directory_uri() . "/our-blocks/{$this->name}.js", array('wp-blocks', 'wp-editor'));
-      
-      register_block_type("ourblocktheme/{$this->name}", array(
-        'editor_script' => $this->name,
-        'render_callback' => [$this, 'ourRenderCallback']
-      ));
-    }
-  }
-
   function theme_blocks() {
     register_block_type_from_metadata( __DIR__ . '/build/footer' );
     register_block_type_from_metadata( __DIR__ . '/build/header' );
+
+    wp_localize_script( 'wp-editor', 'ourThemeData', array('themePath' => get_stylesheet_directory_uri(  )) );
+    register_block_type_from_metadata( __DIR__ . '/build/banner' );
+
+    register_block_type_from_metadata( __DIR__ . '/build/slide' );
+    register_block_type_from_metadata( __DIR__ . '/build/slideshow' );
+
     register_block_type_from_metadata( __DIR__ . '/build/eventsandblogs' );
     register_block_type_from_metadata( __DIR__ . '/build/singlepost' );
     register_block_type_from_metadata( __DIR__ . '/build/page' );
 
-    register_block_type_from_metadata(__DIR__ . '/build/blogindex');
-    register_block_type_from_metadata(__DIR__ . '/build/programarchive');
-    register_block_type_from_metadata(__DIR__ . '/build/singleprogram');
-    register_block_type_from_metadata(__DIR__ . '/build/singleprofessor');
-    register_block_type_from_metadata(__DIR__ . '/build/notes');
+    register_block_type_from_metadata( __DIR__ . '/build/genericheading' );
+    register_block_type_from_metadata( __DIR__ . '/build/genericbutton' );
+
     register_block_type_from_metadata(__DIR__ . '/build/archivecampus');
     register_block_type_from_metadata(__DIR__ . '/build/archiveevent');
     register_block_type_from_metadata(__DIR__ . '/build/archive');
+    register_block_type_from_metadata(__DIR__ . '/build/blogindex');
+    register_block_type_from_metadata(__DIR__ . '/build/notes');
     register_block_type_from_metadata(__DIR__ . '/build/pastevents');
-    register_block_type_from_metadata(__DIR__ . '/build/singlecampus');
-    register_block_type_from_metadata(__DIR__ . '/build/singleevent');
+    register_block_type_from_metadata(__DIR__ . '/build/programarchive');
+    
     register_block_type_from_metadata(__DIR__ . '/build/search');
     register_block_type_from_metadata(__DIR__ . '/build/searchresults');
+
+    register_block_type_from_metadata(__DIR__ . '/build/singleprogram');
+    register_block_type_from_metadata(__DIR__ . '/build/singleprofessor');
+    register_block_type_from_metadata(__DIR__ . '/build/singlecampus');
+    register_block_type_from_metadata(__DIR__ . '/build/singleevent');
+
   }
 
   add_action("init", "theme_blocks");
-  
-  //new PlaceholderBlock("eventsandblogs");
-  //new PlaceholderBlock("header");
-  //new PlaceholderBlock("footer");
-  
-  //new PlaceholderBlock("singlepost");
-  //new PlaceholderBlock("page");
-  //new PlaceholderBlock("blogindex");
-  //new PlaceholderBlock("programarchive");
-  //new PlaceholderBlock("singleprogram");
-  //new PlaceholderBlock("singleprofessor");
-  //new PlaceholderBlock("notes");
-  //new PlaceholderBlock("archiveevent");
-  //new PlaceholderBlock("singleevent");
-  //new PlaceholderBlock("archivecampus");
-  //new PlaceholderBlock("singlecampus");
-  //new PlaceholderBlock("search");
-  //new PlaceholderBlock("searchresults");
-
-    //block theme JSX Block (wysiwyg block is rendered in the editor as well as in the front end)
-    class JSXBlock {
-        function __construct($name, $renderCallback = null, $data = null) {
-            $this->name = $name;
-            $this->data = $data;
-            $this->renderCallback = $renderCallback;
-            add_action('init', [$this, 'onInit']);
-        }
-
-        function ourRenderCallback($attributes, $content) {
-            ob_start();
-            require get_theme_file_path("/our-blocks/{$this->name}.php");
-            return ob_get_clean();
-        }
-
-        function onInit() {
-            wp_register_script($this->name, get_stylesheet_directory_uri() . "/build/{$this->name}.js", array('wp-blocks', 'wp-editor',));
-            if($this->data) {
-                //localize_script(hook, variable name to save/access the data, output data)
-                wp_localize_script($this->name, $this->name, $this->data );
-            }
-            $ourArgs = array(
-                'editor_script' => $this->name
-            );
-
-            if ($this->renderCallback) {
-                $ourArgs['render_callback'] = [$this, 'ourRenderCallback'];
-            }
-            register_block_type("ourblocktheme/{$this->name}", $ourArgs);
-
-        }
-    }
-
-    new JSXBlock('banner', true, ['fallbackimage' => get_theme_file_uri('/images/library-hero.jpg')]);
-    new JSXBlock('genericheading');
-    new JSXBlock('genericbutton');
-    new JSXBlock('slideshow', true);
-    new JSXBlock('slide', true, ['themeimagepath' => get_theme_file_uri('/images/')]);
 
     //only allow certain block types in certain editor environments
 
-    function allowedBlocks($allowed_block_types, $editor_context) {
+    /*function allowedBlocks($allowed_block_types, $editor_context) {
         //if the user is on a post or page editor screen
         if(!empty($editor_context->post)) {
             //all block types are allowed (no restrictions)
@@ -290,6 +222,6 @@ class PlaceholderBlock {
         return array('ourblocktheme/header', "ourblocktheme/footer", "core/paragraph", "core/heading");
     }
 
-    add_filter('allowed_block_types_all', 'allowedBlocks', 10, 2);
+    add_filter('allowed_block_types_all', 'allowedBlocks', 10, 2);*/
 
 ?>

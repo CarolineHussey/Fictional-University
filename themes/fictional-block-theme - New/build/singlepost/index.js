@@ -56,7 +56,7 @@ module.exports = window["wp"]["blockEditor"];
   \***********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ourblocktheme/singlepost","editorScript":"file:./index.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"ourblocktheme/singlepost","title":"Single Post","editorScript":"file:./index.js","render":"file:./render.php"}');
 
 /***/ })
 
