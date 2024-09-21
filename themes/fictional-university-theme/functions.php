@@ -1,7 +1,15 @@
 <?php 
 
+add_filter( 'query_vars', 'themeQueryVars' );
+
 require get_theme_file_path('inc/search-route.php');
 require get_theme_file_path('inc/like-route.php');
+
+function themeQueryVars($vars) {
+    $vars[] = 'easterEgg';
+    $vars[] = 'color';
+    return $vars;
+}
 
 function university_custom_rest() {
     register_rest_field('post', 'authorName', array(
@@ -18,6 +26,8 @@ add_action('rest_api_init', 'university_custom_rest', );
 function pageBanner($args = NULL) { ?>
 
 <?php 
+
+        
         if (!isset($args['title'])) {
             $args['title'] = get_the_title();
         }
@@ -25,14 +35,16 @@ function pageBanner($args = NULL) { ?>
         if (!isset($args['subtitle'])) {
             $args['subtitle'] = get_field('subtitle');
         }
-
+        if (!is_archive() && !is_home()) {
         if (!isset($args['photo'])) {
             if (get_field('background_image')) {
                 $args['photo'] = get_field('background_image')['sizes']['page-banner'];
-            } else {
+            } 
+            else {
                 $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
             }
         }
+        } else {$args['photo'] = get_theme_file_uri('/images/ocean.jpg');}
         ?>
 
 <div class="page-banner">

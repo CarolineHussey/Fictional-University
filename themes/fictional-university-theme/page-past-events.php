@@ -39,5 +39,11 @@ $pastEvents = new WP_Query(
     ) );
   ?>
   <hr class="section-break">
-<p>Want to find out about our current events? Find out more <a href="<?php echo site_url( '/event') ?>">here</a>.</p>
+  <p>Want to find out about our current events? Find out more <a href="<?php echo site_url( '/event') ?>">here</a>.</p>
 </div>
+
+<?php
+
+get_footer();
+
+?>
