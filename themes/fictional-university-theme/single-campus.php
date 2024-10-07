@@ -6,26 +6,25 @@
     the_post(); 
     pageBanner();
     ?>
-    
-    <div class="container container--narrow page-section">
-        <div class="metabox metabox--position-up metabox--with-home-link">
-            <p>
-                <a class="metabox__blog-home-link" href="<?php echo site_url( '/campus' ); ?>">
-                <i class="fa fa-home" aria-hidden="true"></i> All Campuses </a> 
-                <span class="metabox__main"><?php the_title() ?></span>
-            </p>
-    </div>
-        
-    <div class="generic-content"><?php the_content( ); ?></div>
 
-    <?php 
-        $mapLocation = get_field('map_location');
-        ?>
-            <div>
-                <?php
-                echo $mapLocation; ?> 
-            </div>
-    <?php 
+<div class="container container--narrow page-section">
+  <div class="metabox metabox--position-up metabox--with-home-link">
+    <p>
+      <a class="metabox__blog-home-link" href="<?php echo site_url( '/campus' ); ?>">
+        <i class="fa fa-home" aria-hidden="true"></i> All Campuses </a>
+      <span class="metabox__main"><?php the_title() ?></span>
+    </p>
+  </div>
+
+  <div class="generic-content"><?php the_content( ); ?></div>
+
+  <hr class="section-break" />
+  <h2 class="headline headline--medium">How To Find Us</h2>
+
+  <iframe src="<?php echo the_field('map_location') ?>" width="600" height="450" style="border:0;" allowfullscreen=""
+    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  <?php 
 
         $relatedEvents = new WP_Query(
         array(
@@ -53,12 +52,12 @@
 
         if ($relatedEvents->have_posts()) {
             echo '<hr class="section-break">';
-            echo '<h2 class="headline headline--medium">Upcoming Events At '. get_the_title() .' Campus</h2>';
+            echo '<h2 class="headline headline--medium">Upcoming Events At '. get_the_title() .'</h2>';
             echo '<ul class="min-list link-list">';
             while($relatedEvents->have_posts()) {
                 $relatedEvents->the_post(); ?>
-            <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-            <?php
+  <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+  <?php
             }
             echo '</ul>';
             }
@@ -86,8 +85,8 @@
         echo '<ul class="min-list link-list">';
         while($relatedPrograms->have_posts()) {
             $relatedPrograms->the_post(); ?>
-            <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-        <?php
+  <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+  <?php
         }
         echo '</ul>';
         }
@@ -96,8 +95,8 @@
         
         ?>
 
-    </div>
-    <?php }
+</div>
+<?php }
 
     get_footer();
 

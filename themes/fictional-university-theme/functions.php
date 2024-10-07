@@ -97,6 +97,10 @@ function pageBanner($args = NULL) { ?>
             $query->set('posts_per_page', -1);
         }
 
+        if (!is_admin() AND is_post_type_archive( 'campus' ) AND $query->is_main_query(  )) {
+            $query->set('posts_per_page', -1);
+        }
+
         if (!is_admin() AND is_post_type_archive( 'event' ) AND $query->is_main_query(  )) {
             $query->set('meta_key', 'event_date');
             $query->set('orderby', 'meta_value');

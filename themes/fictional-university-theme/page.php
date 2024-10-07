@@ -52,11 +52,10 @@
   <?php } ?>
 
   <div class="generic-content">
-
     <?php the_content(); 
-        
         $sanitizeEasterEgg = sanitize_text_field(get_query_var('easterEgg'));
         $sanitizeColor = sanitize_text_field(get_query_var('color'));?>
+    <hr class="section-break" />
     <h3>Query Vars Test</h3>
     <form method="get">
       <input name="easterEgg" placeholder="Easter Egg"><br />
