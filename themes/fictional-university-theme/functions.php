@@ -173,9 +173,11 @@ function pageBanner($args = NULL) { ?>
 
     add_action('login_enqueue_scripts', 'ourLoginCSS');
 
+    //Force notes to have a status of private (server side)
     function setStatusToPrivate($data, $postarr) {
         if($data['post_type'] === "note") {
 
+            //Apply a limit to the number of posts a user can create (checking that the post already exists before running DIE)
             if(count_user_posts( get_current_user_id(), 'note') > 6 AND !$postarr['ID']) {
                 die("Limit Reached");
             }
@@ -190,7 +192,7 @@ function pageBanner($args = NULL) { ?>
         return $data;
     }
 
-    //Force notes to have a status of private
+    //add_filter('wordpress hook', 'callback function', priority of callback, number of parameters in callback);
     add_filter('wp_insert_post_data', 'setStatusToPrivate', 10, 2);
 
 ?>
