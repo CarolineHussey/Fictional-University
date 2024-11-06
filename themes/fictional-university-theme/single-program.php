@@ -10,7 +10,7 @@
 <div class="container container--narrow page-section">
   <div class="metabox metabox--position-up metabox--with-home-link">
     <p>
-      <a class="metabox__blog-home-link" href="<?php echo site_url( '/program' ); ?>"><i class="fa fa-home"
+      <a class="metabox__blog-home-link" href="<?php echo esc_url(site_url( '/program' )); ?>"><i class="fa fa-home"
           aria-hidden="true"></i> All Programs </a> <span class="metabox__main"><?php the_title() ?></span>
     </p>
   </div>
@@ -43,7 +43,7 @@
         while($relatedProfessors->have_posts()) {
             $relatedProfessors->the_post(); ?>
   <li class="professor-card__list-item">
-    <a class="professor-card" href="<?php the_permalink(); ?>">
+    <a class="professor-card" href="<?php esc_url(the_permalink()); ?>">
       <img class="professor-card__image" src="<?php the_post_thumbnail_url('professor-landscape'); ?>" />
       <span><?php the_title(); ?></span>
     </a>

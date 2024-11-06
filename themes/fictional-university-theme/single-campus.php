@@ -10,7 +10,7 @@
 <div class="container container--narrow page-section">
   <div class="metabox metabox--position-up metabox--with-home-link">
     <p>
-      <a class="metabox__blog-home-link" href="<?php echo site_url( '/campus' ); ?>">
+      <a class="metabox__blog-home-link" href="<?php echo esc_url(site_url( '/campus' )); ?>">
         <i class="fa fa-home" aria-hidden="true"></i> All Campuses </a>
       <span class="metabox__main"><?php the_title() ?></span>
     </p>
@@ -56,7 +56,7 @@
             echo '<ul class="min-list link-list">';
             while($relatedEvents->have_posts()) {
                 $relatedEvents->the_post(); ?>
-  <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+  <li><a href="<?php esc_url(the_permalink()); ?>"><?php the_title(); ?></a></li>
   <?php
             }
             echo '</ul>';
@@ -85,13 +85,13 @@
         echo '<ul class="min-list link-list">';
         while($relatedPrograms->have_posts()) {
             $relatedPrograms->the_post(); ?>
-  <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+  <li><a href="<?php esc_url(the_permalink()); ?>"><?php the_title(); ?></a></li>
   <?php
         }
         echo '</ul>';
         }
 
-        wp_reset_postdata(  );
+        wp_reset_postdata();
         
         ?>
 
