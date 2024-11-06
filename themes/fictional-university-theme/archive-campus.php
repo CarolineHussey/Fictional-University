@@ -14,7 +14,7 @@
         $mapLocation = get_field('map_location');
         ?>
   <div>
-    <h3 style="font-family:Roboto;"><a href="<?php the_permalink() ?>"><?php the_title();?> </a></h3>
+    <h3 style="font-family:Roboto;"><a href="<?php esc_url(the_permalink()); ?>"><?php the_title();?> </a></h3>
     <iframe src="<?php echo the_field('map_location') ?>" width="600" height="450" style="border:0;" allowfullscreen=""
       loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>

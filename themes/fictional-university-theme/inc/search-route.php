@@ -1,5 +1,6 @@
 <?php
 
+//REGISTER THE CUSTOM API
 add_action('rest_api_init', 'universityRegisterSearch');
 
 function universityRegisterSearch() {
@@ -9,6 +10,7 @@ function universityRegisterSearch() {
   ));
 }
 
+//QUERY DATA FOR THE JSON 
 function universitySearchResults($data) {
   $mainQuery = new WP_Query(array(
     'post_type' => array('post', 'page', 'professor', 'program', 'campus', 'event'),
@@ -62,13 +64,6 @@ function universitySearchResults($data) {
       ));
     }
 
-    if (get_post_type() == 'campus') {
-      array_push($results['campuses'], array(
-        'title' => get_the_title(),
-        'permalink' => get_the_permalink()
-      ));
-    }
-
     if (get_post_type() == 'event') {
       $eventDate = new DateTime(get_field('event_date'));
       $description = null;
@@ -90,6 +85,7 @@ function universitySearchResults($data) {
   }
 
   if ($results['programs']) {
+      //to change the default WP search method from 'AND' to 'OR' when there is multiple search conditions
     $programsMetaQuery = array('relation' => 'OR');
 
     foreach($results['programs'] as $item) {
@@ -136,6 +132,7 @@ function universitySearchResults($data) {
 
     }
 
+    //REMOVE DUPLICATES
     $results['professors'] = array_values(array_unique($results['professors'], SORT_REGULAR));
     $results['events'] = array_values(array_unique($results['events'], SORT_REGULAR));
   }

@@ -1,15 +1,20 @@
 <?php 
 
-add_filter( 'query_vars', 'themeQueryVars' );
+//QUERY VARS
 
-require get_theme_file_path('inc/search-route.php');
-require get_theme_file_path('inc/like-route.php');
+add_filter( 'query_vars', 'themeQueryVars' );
 
 function themeQueryVars($vars) {
     $vars[] = 'easterEgg';
     $vars[] = 'color';
     return $vars;
 }
+
+//ADD CUSTOM REST API URL
+require get_theme_file_path('inc/search-route.php');
+require get_theme_file_path('inc/like-route.php');
+
+//ADD CUSTOM FIELDS TO WP REST API
 
 function university_custom_rest() {
     register_rest_field('post', 'authorName', array(
@@ -58,6 +63,7 @@ function pageBanner($args = NULL) { ?>
 </div>
 
 <?php }
+    //LOAD FILES
     function university_files() {
         wp_enqueue_style('google-fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
         wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -65,6 +71,9 @@ function pageBanner($args = NULL) { ?>
         wp_enqueue_style('university_styles_additional', get_theme_file_uri('/build/index.css'));
         wp_enqueue_script('university_js_main', get_theme_file_uri('/build/index.js'), array('jquery'), '0.1', true);
 
+        //creates a javascript object so that we can access the values in our javascript files (and leverage WP functions this way).
+        
+        //see: Search.js -> getResults
         wp_localize_script('university_js_main', 'universityData', array(
             'root_url' => get_site_url(),
             'nonce' => wp_create_nonce('wp_rest')));
